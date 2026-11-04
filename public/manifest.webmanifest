@@ -1,0 +1,16 @@
+{
+  "name": "SIM CONSOLE: robot simulator bench",
+  "short_name": "SIM CONSOLE",
+  "description": "One instrument bench for a walker, a mecanum sweeper and a quadrotor swarm, driven by the simulator, a real board or your own code.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ECEEF0",
+  "theme_color": "#F7F8F9",
+  "categories": ["education", "developer", "utilities"],
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

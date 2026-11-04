@@ -1,0 +1,87 @@
+/* ============================================================
+   BUILTIN IDS — functions the VM implements itself (never routed
+   to the host). Shared by semantic analysis (typing) and the VM
+   (implementation) so both agree on every id.
+   Arduino macros (min, max, abs, constrain, sq, round on AVR,
+   radians, degrees, bit*, highByte, lowByte) are expanded by the
+   analyzer into ordinary expressions instead, exactly as the
+   real preprocessor would.
+   ============================================================ */
+
+export const B = {
+  MILLIS: 0,
+  MICROS: 1,
+  RANDOM1: 2,
+  RANDOM2: 3,
+  RANDOM_SEED: 4,
+  MAP: 5,
+  SQRT: 6,
+  POW: 7,
+  SIN: 8,
+  COS: 9,
+  TAN: 10,
+  ASIN: 11,
+  ACOS: 12,
+  ATAN: 13,
+  ATAN2: 14,
+  EXP: 15,
+  LOG: 16,
+  LOG10: 17,
+  FLOOR: 18,
+  CEIL: 19,
+  ROUND: 20,
+  FABS: 21,
+  FMOD: 22,
+  ISNAN: 23,
+  ISINF: 24,
+  HYPOT: 25,
+  TRUNC: 26,
+  FMIN: 27,
+  FMAX: 28,
+  CBRT: 29,
+  // String formatting: String(v, base, bits) and String(f, digits)
+  STR_INT: 30,
+  STR_FLOAT: 31,
+  // String methods (receiver first)
+  S_LENGTH: 32,
+  S_CHARAT: 33,
+  S_SUBSTRING: 34,
+  S_INDEXOF: 35,
+  S_LASTINDEXOF: 36,
+  S_TOINT: 37,
+  S_TOFLOAT: 38,
+  S_TOUPPER: 39,
+  S_TOLOWER: 40,
+  S_TRIM: 41,
+  S_EQUALS: 42,
+  S_EQUALS_IC: 43,
+  S_STARTSWITH: 44,
+  S_ENDSWITH: 45,
+  S_REPLACE: 46,
+  S_REMOVE: 47,
+  S_SETCHARAT: 48,
+  S_COMPARETO: 49,
+  S_ISEMPTY: 50,
+  S_TOCHARARRAY: 51,
+  S_CONCAT: 52,
+  // character classification (WCharacter.h)
+  C_ISDIGIT: 53,
+  C_ISALPHA: 54,
+  C_ISALNUM: 55,
+  C_ISSPACE: 56,
+  C_ISUPPER: 57,
+  C_ISLOWER: 58,
+  C_ISPUNCT: 59,
+  C_ISXDIGIT: 60,
+  C_ISPRINT: 61,
+  C_ISCONTROL: 62,
+  C_TOUPPER: 63,
+  C_TOLOWER: 64,
+  C_ISASCII: 65,
+  C_ISGRAPH: 66,
+  C_ISWHITESPACE: 67,
+  STRLEN: 68,
+  S_TODOUBLE: 69,
+} as const
+
+export type BuiltinId = (typeof B)[keyof typeof B]

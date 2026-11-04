@@ -1,0 +1,8 @@
+# Netlify: security headers come from public/_headers (copied into dist/),
+# which Netlify and Cloudflare Pages both read, so they are not repeated here.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

@@ -1,0 +1,42 @@
+/* ---------- first-run tour ---------- */
+.tour{position:fixed;inset:0;z-index:120}
+/* catches clicks so the console underneath stays still while the tour talks */
+.tour-scrim{position:absolute;inset:0}
+
+.tour-spot{position:fixed;left:0;top:0;width:0;height:0;border-radius:var(--r3);box-shadow:0 0 0 9999px rgba(20,23,26,.55);outline:2px solid var(--accent);outline-offset:0;pointer-events:none;transition:transform .36s var(--ease),width .36s var(--ease),height .36s var(--ease),outline-color .2s}
+.tour-spot.none{outline-color:transparent}
+.tour-spot::after{content:"";position:absolute;inset:-6px;border-radius:calc(var(--r3) + 4px);border:1px solid var(--accent);opacity:0;animation:tour-ping 1.8s var(--ease) infinite}
+.tour-spot.none::after{display:none}
+@keyframes tour-ping{0%{opacity:.55;transform:scale(.98)}70%{opacity:0;transform:scale(1.04)}100%{opacity:0}}
+
+.tour-card{position:fixed;left:0;top:0;width:min(372px,calc(100vw - 24px));padding:15px 18px 14px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:var(--r3);box-shadow:0 2px 6px rgba(20,23,26,.08),0 24px 60px -14px rgba(20,23,26,.42);opacity:0;transition:transform .36s var(--ease),opacity .2s}
+.tour-card.placed{opacity:1}
+
+.tour-meta{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tour-count{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--accent-press);font-weight:700}
+.tour-count .of{color:var(--ink-2);font-weight:500}
+.tour-skip{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-1);padding:5px 8px;margin-right:-6px;border-radius:var(--r1);transition:color .12s,background .12s}
+.tour-skip:hover{color:var(--ink-0);background:var(--surface-0)}
+.tour-skip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+.tour-copy{animation:tour-fade .28s var(--ease)}
+@keyframes tour-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tour-title{font-family:var(--disp);font-size:19px;font-weight:700;letter-spacing:-.005em;line-height:1.2;margin:9px 0 6px;color:var(--ink-0)}
+.tour-body{font-size:13px;line-height:1.55;color:var(--ink-1)}
+
+.tour-dots{display:flex;gap:5px;margin:14px 0 13px}
+.tour-dots span{width:12px;height:3px;border-radius:2px;background:var(--line);transition:width .25s var(--ease),background .25s}
+.tour-dots span.done{background:var(--line-strong)}
+.tour-dots span.on{width:22px;background:var(--accent)}
+
+.tour-actions{display:flex;justify-content:flex-end;gap:8px}
+.tour-actions .tbtn{height:30px;padding:0 14px}
+
+/* help dialog footer: tour + downloads */
+.help-foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.help-foot .tbtn{height:30px;padding:0 12px;text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){
+  .tour-spot,.tour-card,.tour-dots span{transition:none}
+  .tour-spot::after,.tour-copy{animation:none}
+}

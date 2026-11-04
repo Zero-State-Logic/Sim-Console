@@ -1,0 +1,65 @@
+/* ============================================================
+   INSTRUMENT RAIL — 240° gauges, uPlot streaming charts, per-item
+   bars and the readout table. All values are mono + tabular.
+   ============================================================ */
+
+/* ---------- gauges ---------- */
+.panel-hero{background:
+  radial-gradient(120% 80% at 50% 0%,var(--surface-2) 0,var(--surface-1) 70%)}
+.gauges{gap:10px;align-items:flex-start}
+.gauges.compact{flex-wrap:wrap;gap:8px 6px}
+.gauge{position:relative;margin:0;flex:none}
+.gauge svg{overflow:visible}
+.g-track{fill:none;stroke:var(--line);stroke-width:7;stroke-linecap:round;opacity:.75}
+.g-arc{fill:none;stroke-width:7;stroke-linecap:round}
+.g-tick{stroke:var(--line-strong);stroke-width:.8;stroke-linecap:round}
+.g-tick.major{stroke:var(--ink-2);stroke-width:1.1}
+.g-knob{fill:var(--surface-2);stroke-width:2.2;transition:opacity .2s}
+.g-lim{font-family:var(--mono);font-size:6.5px;fill:var(--ink-2);letter-spacing:.02em}
+.g-read{position:absolute;left:0;right:0;top:calc(var(--gs) * .52 - 15px);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.g-val{font-family:var(--mono);font-weight:700;font-size:26px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.g-unit{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--ink-2);text-transform:uppercase}
+.g-lab{margin-top:-2px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--ink-1);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gauge.compact .g-read{top:calc(var(--gs) * .52 - 11px);gap:2px}
+.gauge.compact .g-val{font-size:19px}
+.gauge.compact .g-unit{font-size:7.5px}
+.gauge.compact .g-lab{font-size:8px}
+
+/* ---------- streaming charts ---------- */
+.chart-panel h3{margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 6px 2px 5px;border:1px solid var(--line);border-radius:var(--r1);background:var(--surface-2);font-family:var(--mono);font-size:9px;line-height:1.4;max-width:100%;min-width:0}
+.chip .sw{width:10px;height:3px;border-radius:2px;flex:none}
+.chip .cl{color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.chip b{color:var(--ink-0);font-weight:700;font-variant-numeric:tabular-nums;min-width:4ch;text-align:right}
+.scope{position:relative;padding:2px 2px 0;background:
+  linear-gradient(var(--surface-2),var(--surface-2)) padding-box;
+  box-shadow:0 1px 0 rgba(20,23,26,.03) inset}
+.scope .uplot{width:100%!important;font-family:var(--mono);line-height:1}
+.scope .u-wrap{display:block}
+.scope .u-over{cursor:crosshair}
+.scope .u-cursor-x{border-right:1px dashed var(--ink-2)}
+.scope .u-legend{display:none}
+
+/* ---------- bars ---------- */
+.bars{gap:7px}
+.barrow{gap:9px}
+.barrow .id{width:24px;font-weight:700;letter-spacing:.04em;flex:none}
+.barrow .bt{position:relative;height:10px;background:
+  linear-gradient(90deg,transparent calc(50% - .5px),var(--line) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px)),
+  var(--surface-2)}
+.barrow .bf{opacity:.92}
+.barrow .pc{width:40px;flex:none;font-variant-numeric:tabular-nums;color:var(--ink-0);font-weight:500}
+.barrow.over .bt{border-color:var(--danger);box-shadow:0 0 0 2px rgba(209,31,45,.12)}
+/* !important: the overload color must beat the per-item inline color */
+.barrow.over .bf{background:repeating-linear-gradient(-45deg,var(--danger) 0 4px,#E5404C 4px 8px)!important;opacity:1}
+.barrow.over .pc{color:var(--danger);font-weight:700}
+
+/* ---------- readouts ---------- */
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r1);overflow:hidden}
+.ro{background:var(--surface-2);padding:7px 9px 8px;min-width:0}
+.ro dt{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--ink-2);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.ro dd{display:flex;align-items:baseline;gap:4px;min-width:0}
+.ro dd b{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink-0);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.ro dd .u{font-family:var(--mono);font-size:9px;color:var(--ink-2);flex:none}
+.readouts .ro:last-child:nth-child(odd){grid-column:1 / -1}

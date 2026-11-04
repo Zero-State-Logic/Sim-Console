@@ -1,0 +1,182 @@
+/* ============================================================
+   SHELL — app frame, top bar, rails, panels, responsive layout.
+   Builds on the frozen tokens in src/theme.css; layout-only
+   variables live on body so portaled dialogs see them too.
+   ============================================================ */
+body{
+  --rail-l:296px;
+  --rail-r:312px;
+  --tb-h:48px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ring:0 0 0 2px var(--surface-2),0 0 0 4px var(--accent);
+  --shadow-pop:0 1px 2px rgba(20,23,26,.06),0 10px 32px -6px rgba(20,23,26,.18);
+  --hair:repeating-linear-gradient(90deg,var(--line) 0 4px,transparent 4px 8px);
+  font-feature-settings:'cv11','ss01';
+}
+::selection{background:var(--accent-weak);color:var(--ink-0)}
+
+/* one focus language everywhere: an orange ring with a white gap */
+:focus{outline:none}
+:focus-visible{outline:none;box-shadow:var(--ring)}
+input[type=range]:focus-visible{box-shadow:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:var(--ring)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:var(--ring)}
+
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.num,.mono{font-variant-numeric:tabular-nums}
+
+@keyframes sc-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+@keyframes sc-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes sc-pop-in{from{opacity:0;transform:translate(-50%,-48%) scale(.98)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes sc-rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---------- app grid ---------- */
+.app{grid-template-rows:var(--tb-h) minmax(0,1fr) auto auto;background:var(--surface-0)}
+.stage{grid-template-columns:var(--rail-l) minmax(0,1fr) var(--rail-r);grid-template-rows:minmax(0,1fr);position:relative}
+.viewport{container-type:inline-size;container-name:vp;overflow:hidden;isolation:isolate}
+@media(min-width:1680px){body{--rail-l:320px;--rail-r:336px}}
+
+/* ---------- top bar ---------- */
+.topbar{
+  height:var(--tb-h);padding:0 12px 0 14px;gap:12px;position:relative;z-index:40;
+  background:linear-gradient(var(--surface-2),var(--surface-1));
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--line);pointer-events:none}
+.tb-left,.tb-right{min-width:0}
+.tb-left{gap:14px}
+.tb-right{gap:8px}
+
+.brand{display:flex;align-items:center;gap:9px;white-space:nowrap;color:var(--ink-0);font-size:15px;letter-spacing:.06em;font-weight:700;padding-right:4px}
+.brand .mark{color:var(--ink-0);flex:none}
+.brand .mark-dot{fill:var(--accent)}
+.brand .dot{color:var(--accent)}
+.brand-name{line-height:1}
+
+.robotsel{padding:2px;gap:2px}
+.robotsel button{
+  font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.09em;
+  padding:5px 11px 5px 8px;border-radius:3px;color:var(--ink-1);display:flex;align-items:center;gap:7px;
+  transition:background .12s,color .12s,box-shadow .12s;
+}
+.robotsel button:hover:not(.on){color:var(--ink-0);background:rgba(255,255,255,.55)}
+.robotsel button .rk{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--ink-2);letter-spacing:0;width:13px;height:13px;border:1px solid var(--line-strong);border-radius:2px;display:grid;place-items:center;line-height:1}
+.robotsel button.on{color:var(--ink-0)}
+.robotsel button.on .rk{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.tbtn{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;white-space:nowrap;transition:border-color .12s,background .12s,color .12s,box-shadow .12s}
+.tbtn:hover:not(:disabled){border-color:var(--line-strong);color:var(--ink-0)}
+.tbtn:active:not(:disabled){transform:translateY(.5px);background:var(--surface-0)}
+.tbtn .pi{font-size:10px;line-height:1;width:12px;text-align:center}
+.tbtn.fw .pi{width:auto;font-size:10px;letter-spacing:-.04em}
+.tbtn.icon{width:28px;padding:0;justify-content:center;font-size:12px;font-weight:700}
+.tbtn.ghost{border-color:transparent;background:transparent}
+.tbtn.ghost:hover:not(:disabled){background:var(--surface-2);border-color:var(--line)}
+
+.tbtn.play{border-color:var(--line);color:var(--ink-0);background:var(--surface-2);min-width:76px}
+.tbtn.play .pi{color:var(--ink-0)}
+.tbtn.play.on{border-color:var(--accent);color:var(--accent-press);background:var(--accent-weak)}
+.tbtn.play.on .pi{color:var(--accent)}
+.tbtn.play.on:hover{border-color:var(--accent-press)}
+
+.recgrp,.transport{display:flex;gap:4px}
+.tbtn.rec{color:var(--ink-1);min-width:62px}
+.tbtn.rec .rd{width:8px;height:8px;border-radius:50%;background:var(--danger);opacity:.55;flex:none}
+.tbtn.rec:hover:not(:disabled) .rd{opacity:1}
+.tbtn.rec.on{color:var(--danger);border-color:var(--danger);background:rgba(209,31,45,.06)}
+.tbtn.rec.on .rd{opacity:1;animation:sc-pulse 1.1s ease-in-out infinite}
+
+.speedsel{display:flex;padding:2px;gap:1px;background:var(--surface-0);border:1px solid var(--line);border-radius:var(--r2)}
+.speedsel button{font-family:var(--mono);font-size:10px;padding:0 7px;height:22px;border-radius:3px;color:var(--ink-2);min-width:30px;transition:background .12s,color .12s}
+.speedsel button:hover:not(.on){color:var(--ink-0)}
+.speedsel button.on{background:var(--surface-2);color:var(--ink-0);box-shadow:var(--elev);font-weight:700}
+
+.clock{display:inline-flex;align-items:baseline;gap:5px;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--ink-0);min-width:86px;justify-content:flex-end;font-variant-numeric:tabular-nums;padding:0 2px}
+.clock .ck-k{font-size:9px;color:var(--ink-2);letter-spacing:.1em}
+
+.tb-sep{width:1px;height:20px;background:var(--line);flex:none;margin:0 2px}
+
+.tbtn.qual{gap:7px}
+.qbars{display:inline-flex;align-items:flex-end;gap:1.5px;height:10px}
+.qbars i{display:block;width:2.5px;background:var(--line-strong);border-radius:1px}
+.qbars i:nth-child(1){height:4px}
+.qbars i:nth-child(2){height:7px}
+.qbars i:nth-child(3){height:10px}
+.tbtn.qual.high .qbars i,.tbtn.qual.low .qbars i:first-child{background:var(--ink-0)}
+
+.railtog{display:none}
+.railtog.on{border-color:var(--ink-0);color:var(--ink-0);background:var(--surface-2)}
+
+/* ---------- rails ---------- */
+.rail{background:var(--surface-1);scrollbar-width:thin;scrollbar-color:var(--line) transparent;overscroll-behavior:contain}
+.rail-inner{display:flex;flex-direction:column;min-height:100%}
+.rail-inner::after{content:"";flex:1;min-height:24px;background:repeating-linear-gradient(-45deg,transparent 0 6px,rgba(184,190,196,.2) 6px 7px)}
+
+.panel{padding:14px 14px 16px;background:var(--surface-1);transition:background .2s}
+.panel h3{gap:10px;line-height:1.2}
+.panel h3 .u{font-weight:500;letter-spacing:.1em;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.panel.reg::before,.panel.reg::after{transition:border-color .2s}
+.panel.reg:hover::before,.panel.reg:hover::after{border-color:var(--ink-2)}
+
+/* ---------- compact top bar: icons instead of labels ----------
+   Measured widths: ~1320 px with labels, ~1100 px without, ~980 px without the
+   wordmark. Each step kicks in with ~100 px to spare for font fallback. */
+@media(max-width:1440px){
+  .tbtn .lbl{display:none}
+  .tbtn.play,.tbtn.rec{min-width:0}
+  .tbtn.play,.tbtn.profiles,.tbtn.fw,.transport .tbtn,.railtog{padding:0 8px}
+}
+@media(max-width:1240px){
+  .brand-name{display:none}
+  .tb-left{gap:10px}
+}
+
+/* ---------- narrow: rails become overlays ---------- */
+@media(max-width:1100px){
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .viewport{grid-column:1;grid-row:1}
+  .rail{position:absolute;top:0;bottom:0;width:min(340px,88vw);z-index:30;box-shadow:var(--shadow-pop);transition:transform .24s var(--ease),visibility 0s linear .24s;visibility:hidden}
+  .rail-left{left:0;transform:translateX(-102%)}
+  .rail-right{right:0;transform:translateX(102%)}
+  .stage.show-left .rail-left,.stage.show-right .rail-right{transform:none;visibility:visible;transition:transform .24s var(--ease),visibility 0s}
+  .rail-scrim{position:absolute;inset:0;z-index:25;background:rgba(20,23,26,.16);backdrop-filter:blur(1.5px);animation:sc-fade-in .18s ease;cursor:default}
+  .railtog{display:inline-flex}
+  .tb-right .tb-sep{display:none}
+  .brand-name{display:none}
+}
+
+/* ---------- tablet: the top bar wraps onto two rows ---------- */
+@media(max-width:1040px){
+  body{--tb-h:auto}
+  .topbar{flex-wrap:wrap;padding:8px 14px;row-gap:8px}
+  .tb-left,.tb-right{width:100%}
+  .tb-right{justify-content:flex-start}
+  .tb-right .railtog{margin-left:auto}
+  .brand-name{display:inline}
+}
+
+/* ---------- phone: stack viewport, controls, instruments ---------- */
+@media(max-width:700px){
+  html,body,#root{height:auto;min-height:100%}
+  body{overflow-x:hidden;overflow-y:auto}
+  .app{display:flex;flex-direction:column;min-height:100vh;height:auto}
+  .topbar{padding:10px 16px}
+  .tb-left,.tb-right{flex-wrap:wrap;row-gap:8px}
+  .tb-left{justify-content:space-between;gap:10px}
+  .tb-right{gap:6px}
+  .robotsel{order:3;width:100%}
+  .robotsel button{flex:1;justify-content:center}
+  .clock{min-width:0;margin-left:auto}
+  .railtog,.rail-scrim{display:none!important}
+  .stage{display:flex;flex-direction:column;gap:12px;padding:12px 16px 16px}
+  .viewport{order:0;height:62vh;min-height:320px;max-height:640px;border:1px solid var(--line);border-radius:var(--r2)}
+  .rail{position:static;width:auto;transform:none;visibility:visible;box-shadow:none;border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;transition:none}
+  .rail-right{order:1}
+  .rail-left{order:2}
+  .rail-inner::after{display:none}
+  .panel{padding:14px 16px 16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}

@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-labelledby="t d">
+  <title id="t">SIM CONSOLE</title>
+  <desc id="d">A walker, a LiDAR sweeper and a drone swarm on one instrument bench, driven by the simulator, real hardware or your own code.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#D3D7DB" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid5" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M120 0H0V120" fill="none" stroke="#B8BEC4" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FF5A1F" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#FF5A1F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0C8F9B" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#0C8F9B" stop-opacity="0"/>
+    </linearGradient>
+    <g id="quad">
+      <path d="M-15 -15L15 15M15 -15L-15 15" stroke="#14171A" stroke-width="3" stroke-linecap="round"/>
+      <rect x="-6" y="-6" width="12" height="12" rx="3" fill="#FDFDFE" stroke="#14171A" stroke-width="1.6"/>
+      <g fill="#FF5A1F" fill-opacity=".22" stroke="#FF5A1F" stroke-width="1.4">
+        <circle cx="-15" cy="-15" r="8"/><circle cx="15" cy="-15" r="8"/><circle cx="-15" cy="15" r="8"/><circle cx="15" cy="15" r="8"/>
+      </g>
+      <circle r="2" fill="#FF5A1F"/>
+    </g>
+  </defs>
+
+  <!-- bench -->
+  <rect x="1" y="1" width="1198" height="418" rx="14" fill="#F7F8F9" stroke="#D3D7DB" stroke-width="2"/>
+  <rect x="1" y="1" width="1198" height="418" rx="14" fill="url(#grid)" opacity=".55"/>
+  <rect x="1" y="1" width="1198" height="418" rx="14" fill="url(#grid5)" opacity=".6"/>
+  <g fill="none" stroke="#B8BEC4" stroke-width="2">
+    <path d="M18 42V18H42"/><path d="M1158 18H1182V42"/><path d="M1182 378V402H1158"/><path d="M42 402H18V378"/>
+  </g>
+
+  <!-- wordmark -->
+  <g font-family="'Chakra Petch','Segoe UI','Helvetica Neue',Arial,sans-serif">
+    <g transform="translate(64 112)">
+      <path d="M0 10V0h10M30 0h10v10M40 30v10H30M10 40H0V30" fill="none" stroke="#14171A" stroke-width="2.4"/>
+      <path d="M20 4v8M20 28v8M4 20h8M28 20h8" stroke="#14171A" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="5.5" fill="#FF5A1F"/>
+    </g>
+    <!-- textLength pins every line to its column whatever fonts the viewer has -->
+    <text x="122" y="146" font-size="50" font-weight="700" fill="#14171A" textLength="318" lengthAdjust="spacingAndGlyphs">SIM CONSOLE<tspan fill="#FF5A1F">.</tspan></text>
+  </g>
+  <g font-family="'JetBrains Mono','Cascadia Mono',Consolas,'Courier New',monospace" fill="#4A5157">
+    <text x="66" y="194" font-size="12.5" textLength="374" lengthAdjust="spacingAndGlyphs">ONE BENCH · THREE ROBOTS · THREE DRIVE SOURCES</text>
+    <text x="66" y="230" font-size="15.5" fill="#14171A" font-family="'Inter','Segoe UI','Helvetica Neue',Arial,sans-serif" textLength="374" lengthAdjust="spacingAndGlyphs">Sim to design it. Hardware to prove it. Code to test it.</text>
+  </g>
+
+  <!-- drive-source chips -->
+  <g font-family="'JetBrains Mono','Cascadia Mono',Consolas,'Courier New',monospace" font-size="13" font-weight="700" letter-spacing="1.5">
+    <g transform="translate(66 262)">
+      <rect width="86" height="34" rx="6" fill="#0C8F9B"/><circle cx="16" cy="17" r="4" fill="#fff"/>
+      <text x="28" y="22" fill="#fff">SIM</text>
+    </g>
+    <g transform="translate(162 262)">
+      <rect width="132" height="34" rx="6" fill="#FDFDFE" stroke="#1F9D57" stroke-width="1.6"/><circle cx="16" cy="17" r="4" fill="#1F9D57"/>
+      <text x="28" y="22" fill="#1F9D57">HARDWARE</text>
+    </g>
+    <g transform="translate(304 262)">
+      <rect width="92" height="34" rx="6" fill="#FDFDFE" stroke="#6C4CF0" stroke-width="1.6"/><circle cx="16" cy="17" r="4" fill="#6C4CF0"/>
+      <text x="28" y="22" fill="#6C4CF0">CODE</text>
+    </g>
+  </g>
+
+  <!-- scope trace -->
+  <g transform="translate(66 318)">
+    <rect width="330" height="62" rx="5" fill="#FDFDFE" stroke="#D3D7DB"/>
+    <path d="M0 31H330M82 0V62M165 0V62M247 0V62" stroke="#ECEEF0"/>
+    <path d="M0 40 C 20 12, 40 12, 60 40 S 100 68, 120 40 S 160 12, 180 40 S 220 68, 240 40 S 280 12, 300 40 S 325 60, 330 46" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-dasharray="520" stroke-dashoffset="520">
+      <animate attributeName="stroke-dashoffset" values="520;0;0" keyTimes="0;.7;1" dur="3.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M0 34 C 25 22, 45 22, 70 34 S 115 46, 140 34 S 185 22, 210 34 S 255 46, 280 34 S 320 26, 330 30" fill="none" stroke="#0C8F9B" stroke-width="1.6" opacity=".8" stroke-dasharray="520" stroke-dashoffset="520">
+      <animate attributeName="stroke-dashoffset" values="520;0;0" keyTimes="0;.75;1" dur="3.2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- robot panels -->
+  <g font-family="'JetBrains Mono','Cascadia Mono',Consolas,'Courier New',monospace" font-size="11" letter-spacing="1.6" fill="#828A90">
+    <!-- WALKER -->
+    <g transform="translate(470 52)">
+      <rect width="220" height="316" rx="10" fill="#FDFDFE" stroke="#D3D7DB"/>
+      <text x="16" y="26">WALKER · 6 LEGS</text>
+      <g transform="translate(110 172)">
+        <circle r="70" fill="url(#glow)"/>
+        <g stroke="#14171A" stroke-width="5" stroke-linecap="round" fill="none">
+          <g>
+            <path d="M0 -38L-14 -82M33 19L80 34M-33 19L-60 62"/>
+            <animateTransform attributeName="transform" type="translate" values="0 -6;0 6;0 -6" dur="1.2s" repeatCount="indefinite"/>
+          </g>
+          <g>
+            <path d="M0 38L14 82M-33 -19L-80 -34M33 -19L60 -62"/>
+            <animateTransform attributeName="transform" type="translate" values="0 6;0 -6;0 6" dur="1.2s" repeatCount="indefinite"/>
+          </g>
+        </g>
+        <polygon points="0,-44 38,-22 38,22 0,44 -38,22 -38,-22" fill="#FDFDFE" stroke="#14171A" stroke-width="2.4"/>
+        <polygon points="0,-28 24,-14 24,14 0,28 -24,14 -24,-14" fill="none" stroke="#B8BEC4" stroke-width="1.4"/>
+        <g fill="#FF5A1F"><circle cx="0" cy="-38" r="5"/><circle cx="33" cy="19" r="5"/><circle cx="-33" cy="19" r="5"/><circle cx="0" cy="38" r="5"/><circle cx="-33" cy="-19" r="5"/><circle cx="33" cy="-19" r="5"/></g>
+        <circle cx="0" cy="0" r="3" fill="#FF5A1F">
+          <animate attributeName="opacity" values="1;.25;1" dur="1.2s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+      <text x="16" y="298" fill="#4A5157">IK · TRIPOD · LOAD Jᵀ·F</text>
+    </g>
+
+    <!-- SWEEPER -->
+    <g transform="translate(710 52)">
+      <rect width="220" height="316" rx="10" fill="#FDFDFE" stroke="#D3D7DB"/>
+      <text x="16" y="26">SWEEPER · LD06</text>
+      <g fill="#ECEEF0" stroke="#B8BEC4" stroke-width="1.4">
+        <rect x="30" y="60" width="56" height="40" rx="3"/><rect x="146" y="214" width="46" height="44" rx="3"/><circle cx="170" cy="92" r="18"/><circle cx="46" cy="232" r="14"/>
+      </g>
+      <g transform="translate(110 168)">
+        <g>
+          <path d="M0 0L118 -40A124 124 0 0 1 118 40Z" fill="url(#fan)"/>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2.4s" repeatCount="indefinite"/>
+        </g>
+        <rect x="-28" y="-22" width="56" height="44" rx="8" fill="#FDFDFE" stroke="#14171A" stroke-width="2.4"/>
+        <g fill="#14171A"><rect x="-34" y="-20" width="8" height="14" rx="2"/><rect x="26" y="-20" width="8" height="14" rx="2"/><rect x="-34" y="6" width="8" height="14" rx="2"/><rect x="26" y="6" width="8" height="14" rx="2"/></g>
+        <circle r="9" fill="#14171A"/><circle r="4" fill="#FF5A1F"/>
+      </g>
+      <g fill="#FF5A1F">
+        <circle cx="86" cy="80" r="2.6"><animate attributeName="opacity" values="0;1;0" dur="2.4s" begin=".9s" repeatCount="indefinite"/></circle>
+        <circle cx="152" cy="96" r="2.6"><animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="1.7s" repeatCount="indefinite"/></circle>
+        <circle cx="146" cy="232" r="2.6"><animate attributeName="opacity" values="0;1;0" dur="2.4s" begin=".3s" repeatCount="indefinite"/></circle>
+        <circle cx="60" cy="232" r="2.6"><animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="2.1s" repeatCount="indefinite"/></circle>
+      </g>
+      <text x="16" y="298" fill="#4A5157">MECANUM · A* · COVERAGE</text>
+    </g>
+
+    <!-- SWARM -->
+    <g transform="translate(950 52)">
+      <rect width="220" height="316" rx="10" fill="#FDFDFE" stroke="#D3D7DB"/>
+      <text x="16" y="26">SWARM · 3 QUADS</text>
+      <g transform="translate(110 170)">
+        <circle r="72" fill="none" stroke="#D3D7DB" stroke-dasharray="4 6"/>
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="9s" repeatCount="indefinite"/>
+          <g transform="translate(0 -60)"><use href="#quad"/></g>
+          <g transform="translate(52 30)"><use href="#quad"/></g>
+          <g transform="translate(-52 30)"><use href="#quad"/></g>
+          <path d="M0 -60L52 30L-52 30Z" fill="none" stroke="#6C4CF0" stroke-width="1.2" stroke-dasharray="3 5" opacity=".7"/>
+        </g>
+        <g fill="none" stroke="#FF5A1F" stroke-width="1.6">
+          <circle cx="0" cy="-104" r="6"/><circle cx="90" cy="52" r="6"/><circle cx="-90" cy="52" r="6"/>
+        </g>
+      </g>
+      <text x="16" y="298" fill="#4A5157">12-STATE · PID · ORCA</text>
+    </g>
+  </g>
+</svg>
